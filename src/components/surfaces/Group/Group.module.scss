@@ -1,0 +1,39 @@
+.root {
+  position: relative;
+  padding: 16px;
+  border-width: 1px;
+  border-color: #d4d4d4;
+
+  &--default {
+    border-style: none;
+  }
+
+  &--outlined {
+    border-style: solid;
+  }
+
+  &--dashed {
+    border-style: dashed;
+  }
+}
+
+.closeButton.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  border: solid 1px #d4d4d4;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    z-index: -1;
+    border-radius: 50%;
+  }
+}
