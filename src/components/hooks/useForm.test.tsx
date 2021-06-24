@@ -139,7 +139,7 @@ describe('useForm', () => {
 
       // Name is long enough
       act(() => {
-        result.current.handleChange('name')(getFakeTestEvent('xxxrrrrrrrrrrr'));
+        result.current.handleChange('name')(getFakeTestEvent('12'));
       });
 
       act(() => {
