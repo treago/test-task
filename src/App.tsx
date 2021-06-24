@@ -1,12 +1,15 @@
 import React from 'react';
+import { Container } from '@material-ui/core';
 
-import './App.scss';
+import UserProjectsForm from './components/UserProjects/UserProjectsForm';
+
+import styles from './App.module.scss';
 
 function App() {
   return (
-    <div className="App">
-      <div data-testid="form">User projects</div>
-    </div>
+    <Container className={styles.root} maxWidth="sm">
+      <UserProjectsForm />
+    </Container>
   );
 }
 
