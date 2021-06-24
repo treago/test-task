@@ -15,8 +15,23 @@ export interface Project {
 
 const UNITS_OPTIONS = [' ', 'year', 'month', 'day'];
 
+const generateProjects = (values: string[]): Project[] => {
+  const projects: Project[] = [];
+
+  for (const value of values) {
+    projects.push({
+      key: Math.random().toString(),
+      value,
+    });
+  }
+
+  return projects;
+};
+
 export const UserProjectsForm = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<Project[]>(
+    generateProjects(['Bank', 'Tank', 'Sank']),
+  );
   const [projectsDetailsIds, setProjectsDetailsIds] = useState<string[]>([]);
   const [showState, setShowState] = useState(false);
 
@@ -74,7 +89,14 @@ export const UserProjectsForm = () => {
     setShowState(true);
   }, []);
 
-  const { values, errors, groupErrors, handleSubmit, handleChange } = useForm({
+  const {
+    values,
+    errors,
+    groupErrors,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+  } = useForm({
     validations,
     groupValidations,
     onSubmit,
@@ -85,13 +107,7 @@ export const UserProjectsForm = () => {
   }, []);
 
   const handleAddProject = useCallback((value: string) => {
-    setProjects((prev) => [
-      ...prev,
-      {
-        key: Date.now().toString(),
-        value,
-      },
-    ]);
+    setProjects((prev) => [...prev, ...generateProjects([value])]);
   }, []);
 
   const handleRemoveProject = useCallback((key: string) => {
@@ -99,7 +115,7 @@ export const UserProjectsForm = () => {
   }, []);
 
   const handleAddProjectDetails = useCallback(() => {
-    setProjectsDetailsIds((prev) => [...prev, Date.now().toString()]);
+    setProjectsDetailsIds((prev) => [...prev, Math.random().toString()]);
   }, []);
 
   const handleRemoveProjectDetails = useCallback(
@@ -127,6 +143,7 @@ export const UserProjectsForm = () => {
             helperText={errors?.name}
             defaultValue={values.name}
             onChange={handleChange('name')}
+            onBlur={handleBlur}
           />
 
           <ProjectsChips
@@ -154,6 +171,7 @@ export const UserProjectsForm = () => {
                     groupErrors={groupErrors}
                     onChange={handleChange}
                     onClose={handleRemoveProjectDetails(key)}
+                    onBlur={handleBlur}
                   />
                 </Grid>
               ))}
