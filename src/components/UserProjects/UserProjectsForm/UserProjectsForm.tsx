@@ -74,7 +74,14 @@ export const UserProjectsForm = () => {
     setShowState(true);
   }, []);
 
-  const { values, errors, groupErrors, handleSubmit, handleChange } = useForm({
+  const {
+    values,
+    errors,
+    groupErrors,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+  } = useForm({
     validations,
     groupValidations,
     onSubmit,
@@ -127,6 +134,7 @@ export const UserProjectsForm = () => {
             helperText={errors?.name}
             defaultValue={values.name}
             onChange={handleChange('name')}
+            onBlur={handleBlur}
           />
 
           <ProjectsChips
@@ -154,6 +162,7 @@ export const UserProjectsForm = () => {
                     groupErrors={groupErrors}
                     onChange={handleChange}
                     onClose={handleRemoveProjectDetails(key)}
+                    onBlur={handleBlur}
                   />
                 </Grid>
               ))}

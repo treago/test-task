@@ -170,10 +170,15 @@ export const useForm = ({
     }
   };
 
+  const handleBlur = () => {
+    validate(validations, groupValidations);
+  };
+
   return {
     values,
     errors,
     groupErrors,
+    handleBlur,
     handleChange,
     handleSubmit,
   };

@@ -11,6 +11,7 @@ export type ProjectDetailsProps = {
   unitsOptions: string[];
   onChange: FieldChangeHandler;
   onClose: () => void;
+  onBlur: () => void;
 
   project?: string;
   details?: string;
@@ -31,6 +32,7 @@ export const ProjectDetails = memo(
     groupErrors,
     onChange,
     onClose,
+    onBlur,
   }: ProjectDetailsProps) => (
     <Group variant="dashed" onClose={onClose}>
       <Grid container spacing={2} alignItems="center">
@@ -44,8 +46,6 @@ export const ProjectDetails = memo(
             inputValue={project}
             options={projectsOptions}
             size="small"
-            onChange={onChange('project', id) as any}
-            onInputChange={onChange('project', id) as any}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -55,6 +55,9 @@ export const ProjectDetails = memo(
                 helperText={(groupErrors || {})[id]?.project}
               />
             )}
+            onChange={onChange('project', id) as any}
+            onInputChange={onChange('project', id) as any}
+            onBlur={onBlur}
           />
         </Grid>
       </Grid>
@@ -75,6 +78,7 @@ export const ProjectDetails = memo(
             error={!!(groupErrors || {})[id]?.details}
             helperText={(groupErrors || {})[id]?.details}
             onChange={onChange('details', id)}
+            onBlur={onBlur}
           />
         </Grid>
       </Grid>
@@ -94,6 +98,7 @@ export const ProjectDetails = memo(
                 error={!!(groupErrors || {})[id]?.duration}
                 helperText={(groupErrors || {})[id]?.duration}
                 onChange={onChange('duration', id)}
+                onBlur={onBlur}
               />
             </Grid>
             <Grid item xs={6}>
@@ -103,8 +108,6 @@ export const ProjectDetails = memo(
                 inputValue={units}
                 options={unitsOptions}
                 size="small"
-                onChange={onChange('units', id) as any}
-                onInputChange={onChange('units', id) as any}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -114,6 +117,9 @@ export const ProjectDetails = memo(
                     helperText={(groupErrors || {})[id]?.units}
                   />
                 )}
+                onChange={onChange('units', id) as any}
+                onInputChange={onChange('units', id) as any}
+                onBlur={onBlur}
               />
             </Grid>
           </Grid>
